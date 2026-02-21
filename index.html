@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -542,13 +543,33 @@
 <div id="register">
   <h2>Ready to Play? 🎱</h2>
   <p>Drop your name and email and we'll reach out with everything you need to join the next season.</p>
-  <div class="register-form">
-    <input type="text" placeholder="Your name">
-    <input type="email" placeholder="Email address">
-  </div>
-  <button class="btn btn-primary" style="font-size:1.1rem;padding:.85rem 2.5rem;">Sign Me Up →</button>
+  <form action="https://formspree.io/f/mbdazkgk" method="POST" onsubmit="handleSubmit(event)">
+    <div class="register-form">
+      <input type="text" name="name" placeholder="Your name" required>
+      <input type="email" name="email" placeholder="Email address" required>
+    </div>
+    <button type="submit" class="btn btn-primary" style="font-size:1.1rem;padding:.85rem 2.5rem;">Sign Me Up →</button>
+  </form>
+  <p id="form-thanks" style="display:none;margin-top:1.5rem;color:#f5c518;font-weight:700;font-size:1.1rem;">🎱 You're on the list! We'll be in touch.</p>
   <p style="margin-top:1.5rem;font-size:.85rem;color:#555;">Or find us on <a href="https://www.facebook.com/p/Party-8-Ball-Pool-League-100080878736101/" target="_blank">Facebook</a></p>
 </div>
+
+<script>
+async function handleSubmit(e) {
+  e.preventDefault();
+  const form = e.target;
+  const data = new FormData(form);
+  const response = await fetch(form.action, {
+    method: 'POST',
+    body: data,
+    headers: { 'Accept': 'application/json' }
+  });
+  if (response.ok) {
+    form.style.display = 'none';
+    document.getElementById('form-thanks').style.display = 'block';
+  }
+}
+</script>
 
 <!-- FOOTER -->
 <footer>
