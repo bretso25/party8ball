@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Party 8 Ball Pool League</title>
+<link href="https://fonts.googleapis.com/css2?family=Boogaloo&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --green: #1a7a3c;
+    --felt: #0f5c2a;
+    --gold: #f5c518;
+    --chalk: #b8d4e8;
+    --dark: #111;
+    --light: #f9f5e8;
+    --red: #cc2222;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Nunito', sans-serif;
+    background: var(--dark);
+    color: var(--light);
+    overflow-x: hidden;
+  }
+
+  /* ── HERO ── */
+  header {
+    min-height: 100vh;
+    background:
+      radial-gradient(ellipse at 60% 40%, rgba(26,122,60,0.35) 0%, transparent 60%),
+      radial-gradient(ellipse at 20% 80%, rgba(245,197,24,0.12) 0%, transparent 50%),
+      url("data:image/svg+xml,%3Csvg width='60' height='60' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='30' cy='30' r='1' fill='%23ffffff08'/%3E%3C/svg%3E"),
+      #0d0d0d;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 2rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  header::before {
+    content: '🎱';
+    font-size: 340px;
+    position: absolute;
+    right: -80px;
+    bottom: -60px;
+    opacity: 0.06;
+    line-height: 1;
+    pointer-events: none;
+    animation: spin 40s linear infinite;
+  }
+
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  .badge {
+    display: inline-block;
+    background: var(--gold);
+    color: var(--dark);
+    font-weight: 800;
+    font-size: .75rem;
+    letter-spacing: .15em;
+    text-transform: uppercase;
+    padding: .35rem 1rem;
+    border-radius: 99px;
+    margin-bottom: 1.5rem;
+    animation: fadeUp .6s ease both;
+  }
+
+  h1 {
+    font-family: 'Boogaloo', cursive;
+    font-size: clamp(3.5rem, 10vw, 7rem);
+    line-height: .95;
+    color: #fff;
+    text-shadow: 0 0 60px rgba(245,197,24,0.3);
+    animation: fadeUp .7s .1s ease both;
+  }
+
+  h1 span { color: var(--gold); }
+
+  .sub {
+    font-size: 1.15rem;
+    color: #ccc;
+    margin: 1.5rem 0 2.5rem;
+    max-width: 500px;
+    animation: fadeUp .7s .2s ease both;
+  }
+
+  .hero-btns {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    animation: fadeUp .7s .3s ease both;
+  }
+
+  .btn {
+    padding: .75rem 2rem;
+    border-radius: 8px;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    font-size: 1rem;
+    cursor: pointer;
+    border: none;
+    text-decoration: none;
+    transition: transform .15s, box-shadow .15s;
+  }
+
+  .btn:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,.4); }
+
+  .btn-primary { background: var(--gold); color: var(--dark); }
+  .btn-outline { background: transparent; color: #fff; border: 2px solid #fff4; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: .9rem 2rem;
+    background: rgba(10,10,10,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid #ffffff12;
+  }
+
+  .nav-logo {
+    font-family: 'Boogaloo', cursive;
+    font-size: 1.4rem;
+    color: var(--gold);
+    text-decoration: none;
+  }
+
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a { color: #ccc; text-decoration: none; font-weight: 600; font-size: .9rem; transition: color .2s; }
+  .nav-links a:hover { color: var(--gold); }
+
+  /* ── SECTIONS ── */
+  section { padding: 6rem 2rem; max-width: 1100px; margin: 0 auto; }
+
+  .section-title {
+    font-family: 'Boogaloo', cursive;
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    margin-bottom: .5rem;
+    color: #fff;
+  }
+
+  .section-title span { color: var(--gold); }
+  .divider { width: 60px; height: 4px; background: var(--gold); border-radius: 2px; margin-bottom: 2.5rem; }
+
+  /* ── HOW IT WORKS ── */
+  .steps {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+  }
+
+  .step-card {
+    background: #1a1a1a;
+    border: 1px solid #ffffff10;
+    border-radius: 16px;
+    padding: 2rem 1.5rem;
+    transition: border-color .2s, transform .2s;
+  }
+
+  .step-card:hover { border-color: var(--gold); transform: translateY(-4px); }
+
+  .step-num {
+    font-family: 'Boogaloo', cursive;
+    font-size: 3rem;
+    color: var(--gold);
+    line-height: 1;
+  }
+
+  .step-card h3 { font-size: 1.1rem; margin: .5rem 0; }
+  .step-card p { color: #aaa; font-size: .9rem; line-height: 1.6; }
+
+  /* ── STANDINGS ── */
+  #standings { background: #111; }
+  #standings > div { max-width: 1100px; margin: 0 auto; padding: 6rem 2rem; }
+
+  .standings-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: .95rem;
+  }
+
+  .standings-table th {
+    text-align: left;
+    padding: .75rem 1rem;
+    background: #1a1a1a;
+    color: var(--gold);
+    font-size: .8rem;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+  }
+
+  .standings-table th:first-child { border-radius: 8px 0 0 8px; }
+  .standings-table th:last-child { border-radius: 0 8px 8px 0; }
+
+  .standings-table td {
+    padding: .85rem 1rem;
+    border-bottom: 1px solid #ffffff0a;
+    color: #ddd;
+  }
+
+  .standings-table tr:last-child td { border-bottom: none; }
+
+  .standings-table tr:hover td { background: #ffffff06; }
+
+  .rank-1 td:first-child { color: var(--gold); font-weight: 800; }
+  .rank-2 td:first-child { color: #c0c0c0; font-weight: 800; }
+  .rank-3 td:first-child { color: #cd7f32; font-weight: 800; }
+
+  .team-name { font-weight: 700; color: #fff; }
+  .win-pct { color: var(--green); font-weight: 700; }
+
+  /* ── SCHEDULE ── */
+  .schedule-grid {
+    display: grid;
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+
+  .match-card {
+    background: #1a1a1a;
+    border-radius: 12px;
+    padding: 1.25rem 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    border-left: 4px solid var(--green);
+    transition: border-color .2s;
+  }
+
+  .match-card:hover { border-color: var(--gold); }
+  .match-card.completed { border-left-color: #444; opacity: .7; }
+
+  .match-date { font-size: .8rem; color: #888; min-width: 90px; }
+  .match-teams { font-weight: 700; flex: 1; color: #fff; }
+  .match-venue { font-size: .85rem; color: #888; }
+  .match-score { font-family: 'Boogaloo', cursive; font-size: 1.3rem; color: var(--gold); min-width: 60px; text-align: right; }
+
+  /* ── GALLERY / VIBE ── */
+  .vibe-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: auto;
+    gap: 1rem;
+    margin-top: 2rem;
+  }
+
+  .vibe-card {
+    border-radius: 12px;
+    background: #1a1a1a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 4rem;
+    padding: 2.5rem;
+    border: 1px solid #ffffff10;
+    transition: transform .2s;
+  }
+
+  .vibe-card:hover { transform: scale(1.04); }
+  .vibe-card.wide { grid-column: span 2; }
+  .vibe-card.tall { grid-row: span 2; font-size: 6rem; }
+
+  .vibe-card.text-card {
+    font-size: 1rem;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 2rem;
+    background: var(--felt);
+  }
+
+  .vibe-card.text-card h3 { font-family: 'Boogaloo', cursive; font-size: 1.8rem; margin-bottom: .5rem; color: var(--gold); }
+  .vibe-card.text-card p { color: #c6e8c6; font-size: .9rem; line-height: 1.6; }
+
+  /* ── REGISTER ── */
+  #register {
+    text-align: center;
+    background:
+      radial-gradient(ellipse at 50% 0%, rgba(26,122,60,0.3) 0%, transparent 70%),
+      #0d0d0d;
+    padding: 6rem 2rem;
+  }
+
+  #register h2 { font-family: 'Boogaloo', cursive; font-size: clamp(2rem, 6vw, 4rem); }
+  #register p { color: #aaa; margin: 1rem auto 2.5rem; max-width: 480px; }
+
+  .register-form {
+    display: flex;
+    gap: .75rem;
+    max-width: 480px;
+    margin: 0 auto 1.5rem;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .register-form input {
+    flex: 1;
+    min-width: 220px;
+    padding: .8rem 1.25rem;
+    background: #1a1a1a;
+    border: 1px solid #ffffff20;
+    border-radius: 8px;
+    color: #fff;
+    font-family: 'Nunito', sans-serif;
+    font-size: 1rem;
+    outline: none;
+    transition: border-color .2s;
+  }
+
+  .register-form input:focus { border-color: var(--gold); }
+  .register-form input::placeholder { color: #666; }
+
+  /* ── FOOTER ── */
+  footer {
+    text-align: center;
+    padding: 3rem 2rem;
+    border-top: 1px solid #ffffff10;
+    color: #555;
+    font-size: .85rem;
+  }
+
+  footer a { color: var(--gold); text-decoration: none; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 640px) {
+    .nav-links { display: none; }
+    .vibe-grid { grid-template-columns: 1fr 1fr; }
+    .vibe-card.wide { grid-column: span 2; }
+    .vibe-card.tall { grid-row: auto; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#">🎱 Party 8 Ball</a>
+  <ul class="nav-links">
+    <li><a href="#how-it-works">How It Works</a></li>
+    <li><a href="#standings">Standings</a></li>
+    <li><a href="#schedule">Schedule</a></li>
+    <li><a href="#register">Join</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<header>
+  <div class="badge">🎉 Season 4 Now Open</div>
+  <h1>Party<br><span>8 Ball</span><br>Pool League</h1>
+  <p class="sub">Casual. Competitive. Community. Weekly matches at your favorite local bar.</p>
+  <div class="hero-btns">
+    <a href="#register" class="btn btn-primary">Join the League</a>
+    <a href="#schedule" class="btn btn-outline">View Schedule</a>
+  </div>
+</header>
+
+<!-- HOW IT WORKS -->
+<section id="how-it-works">
+  <h2 class="section-title">How It <span>Works</span></h2>
+  <div class="divider"></div>
+  <div class="steps">
+    <div class="step-card">
+      <div class="step-num">01</div>
+      <h3>Register Your Team</h3>
+      <p>Sign up solo or with friends. Teams of 2–4 players. Registration is open at the start of each season.</p>
+    </div>
+    <div class="step-card">
+      <div class="step-num">02</div>
+      <h3>Show Up Weekly</h3>
+      <p>Matches are played every Thursday night at participating local venues. Arrive by 7 PM for a 7:30 start.</p>
+    </div>
+    <div class="step-card">
+      <div class="step-num">03</div>
+      <h3>Play & Track</h3>
+      <p>Wins, losses, and stats are tracked each week. Standings update after every match night.</p>
+    </div>
+    <div class="step-card">
+      <div class="step-num">04</div>
+      <h3>Win Prizes 🏆</h3>
+      <p>Season-end playoffs with cash prizes, trophies, and bar tab rewards for top teams. Bragging rights included.</p>
+    </div>
+  </div>
+</section>
+
+<!-- STANDINGS -->
+<div id="standings">
+  <div>
+    <h2 class="section-title">Season <span>Standings</span></h2>
+    <div class="divider"></div>
+    <table class="standings-table">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Team</th>
+          <th>W</th>
+          <th>L</th>
+          <th>Pct</th>
+          <th>Streak</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="rank-1">
+          <td>1</td>
+          <td class="team-name">🎱 Cue Fighters</td>
+          <td>12</td><td>2</td>
+          <td class="win-pct">.857</td>
+          <td>W5</td>
+        </tr>
+        <tr class="rank-2">
+          <td>2</td>
+          <td class="team-name">🍺 Lucky Breaks</td>
+          <td>10</td><td>4</td>
+          <td class="win-pct">.714</td>
+          <td>W2</td>
+        </tr>
+        <tr class="rank-3">
+          <td>3</td>
+          <td class="team-name">🎯 Scratch Kings</td>
+          <td>9</td><td>5</td>
+          <td class="win-pct">.643</td>
+          <td>L1</td>
+        </tr>
+        <tr>
+          <td>4</td>
+          <td class="team-name">🎳 Solid Stripes</td>
+          <td>8</td><td>6</td>
+          <td class="win-pct">.571</td>
+          <td>W1</td>
+        </tr>
+        <tr>
+          <td>5</td>
+          <td class="team-name">🦊 8-Ball Foxes</td>
+          <td>7</td><td>7</td>
+          <td class="win-pct">.500</td>
+          <td>L2</td>
+        </tr>
+        <tr>
+          <td>6</td>
+          <td class="team-name">🍀 The Underdogs</td>
+          <td>5</td><td>9</td>
+          <td class="win-pct">.357</td>
+          <td>W1</td>
+        </tr>
+        <tr>
+          <td>7</td>
+          <td class="team-name">🔥 Rack Attack</td>
+          <td>4</td><td>10</td>
+          <td class="win-pct">.286</td>
+          <td>L3</td>
+        </tr>
+        <tr>
+          <td>8</td>
+          <td class="team-name">🐢 Corner Pocket Crew</td>
+          <td>3</td><td>11</td>
+          <td class="win-pct">.214</td>
+          <td>L4</td>
+        </tr>
+      </tbody>
+    </table>
+    <p style="color:#555;font-size:.8rem;margin-top:1rem;">Last updated: Feb 19, 2026 · Season 4, Week 14</p>
+  </div>
+</div>
+
+<!-- SCHEDULE -->
+<section id="schedule">
+  <h2 class="section-title">Upcoming <span>Matches</span></h2>
+  <div class="divider"></div>
+  <div class="schedule-grid">
+    <div class="match-card completed">
+      <div class="match-date">Feb 13</div>
+      <div class="match-teams">Cue Fighters vs Lucky Breaks</div>
+      <div class="match-venue">Sneaky Pete's</div>
+      <div class="match-score">7 – 3</div>
+    </div>
+    <div class="match-card completed">
+      <div class="match-date">Feb 13</div>
+      <div class="match-teams">Scratch Kings vs Solid Stripes</div>
+      <div class="match-venue">The Rack Bar</div>
+      <div class="match-score">6 – 4</div>
+    </div>
+    <div class="match-card">
+      <div class="match-date">Feb 20</div>
+      <div class="match-teams">Cue Fighters vs Scratch Kings</div>
+      <div class="match-venue">Sneaky Pete's</div>
+      <div class="match-score">TBD</div>
+    </div>
+    <div class="match-card">
+      <div class="match-date">Feb 20</div>
+      <div class="match-teams">Lucky Breaks vs 8-Ball Foxes</div>
+      <div class="match-venue">The Rack Bar</div>
+      <div class="match-score">TBD</div>
+    </div>
+    <div class="match-card">
+      <div class="match-date">Feb 27</div>
+      <div class="match-teams">Solid Stripes vs The Underdogs</div>
+      <div class="match-venue">Corner Pocket Lounge</div>
+      <div class="match-score">TBD</div>
+    </div>
+    <div class="match-card">
+      <div class="match-date">Mar 6</div>
+      <div class="match-teams">🏆 Playoff Quarterfinals</div>
+      <div class="match-venue">TBD</div>
+      <div class="match-score" style="color:var(--gold)">PLAYOFFS</div>
+    </div>
+  </div>
+</section>
+
+<!-- VIBE -->
+<section>
+  <h2 class="section-title">The <span>Vibe</span></h2>
+  <div class="divider"></div>
+  <div class="vibe-grid">
+    <div class="vibe-card tall">🎱</div>
+    <div class="vibe-card text-card wide">
+      <h3>No Snobs. Just Fun.</h3>
+      <p>Party 8 Ball is built for people who love pool, cold drinks, and good company. All skill levels welcome — from bar novices to seasoned sharks.</p>
+    </div>
+    <div class="vibe-card">🍺</div>
+    <div class="vibe-card">🏆</div>
+    <div class="vibe-card wide">🎉</div>
+  </div>
+</section>
+
+<!-- REGISTER -->
+<div id="register">
+  <h2>Ready to Play? 🎱</h2>
+  <p>Drop your name and email and we'll reach out with everything you need to join the next season.</p>
+  <div class="register-form">
+    <input type="text" placeholder="Your name">
+    <input type="email" placeholder="Email address">
+  </div>
+  <button class="btn btn-primary" style="font-size:1.1rem;padding:.85rem 2.5rem;">Sign Me Up →</button>
+  <p style="margin-top:1.5rem;font-size:.85rem;color:#555;">Or find us on <a href="https://www.facebook.com/p/Party-8-Ball-Pool-League-100080878736101/" target="_blank">Facebook</a></p>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <p style="font-family:'Boogaloo',cursive;font-size:1.2rem;color:#888;margin-bottom:.5rem;">🎱 Party 8 Ball Pool League</p>
+  <p>© 2026 Party 8 Ball · Serving good vibes & better shots</p>
+</footer>
+
+</body>
+</html>
