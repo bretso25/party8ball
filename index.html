@@ -357,13 +357,14 @@
     <li><a href="#how-it-works">How It Works</a></li>
     <li><a href="#standings">Standings</a></li>
     <li><a href="#schedule">Schedule</a></li>
+    <li><a href="tournament.html" style="color:var(--gold);">🏆 Tournament</a></li>
     <li><a href="#register">Join</a></li>
   </ul>
 </nav>
 
 <!-- HERO -->
 <header>
-  <div class="badge">🎉 Season In Session</div>
+  <div class="badge">🎉 Season 4 Now Open</div>
   <h1>Party<br><span>8 Ball</span><br>Pool League</h1>
   <p class="sub">Casual. Competitive. Community. Weekly matches at your favorite local bar.</p>
   <div class="hero-btns">
@@ -380,17 +381,17 @@
     <div class="step-card">
       <div class="step-num">01</div>
       <h3>Register Your Team</h3>
-      <p>Sign up solo or with friends. Teams of 5–8 players. Registration is open at the start of each season.</p>
+      <p>Sign up solo or with friends. Teams of 2–4 players. Registration is open at the start of each season.</p>
     </div>
     <div class="step-card">
       <div class="step-num">02</div>
       <h3>Show Up Weekly</h3>
-      <p>Matches are played nightly at participating local venues. Arrive by 7 PM.</p>
+      <p>Matches are played every Thursday night at participating local venues. Arrive by 7 PM for a 7:30 start.</p>
     </div>
     <div class="step-card">
       <div class="step-num">03</div>
       <h3>Play & Track</h3>
-      <p>Wins, losses, and stats are tracked each week. Standings update after every match weekly</p>
+      <p>Wins, losses, and stats are tracked each week. Standings update after every match night.</p>
     </div>
     <div class="step-card">
       <div class="step-num">04</div>
@@ -542,7 +543,7 @@
 <!-- REGISTER -->
 <div id="register">
   <h2>Ready to Play? 🎱</h2>
-  <p>Drop your name and email and we'll reach out with everything you need to join the next season or you can call Mike Zaretsky at (330) 573-0453.</p>
+  <p>Drop your name and email and we'll reach out with everything you need to join the next season.</p>
   <form action="https://formspree.io/f/mbdazkgk" method="POST" onsubmit="handleSubmit(event)">
     <div class="register-form">
       <input type="text" name="name" placeholder="Your name" required>
@@ -571,6 +572,13 @@ async function handleSubmit(e) {
   }
 }
 </script>
+
+<!-- TOURNAMENT PROMO -->
+<div style="background:linear-gradient(135deg,rgba(26,122,60,0.3),rgba(245,197,24,0.1));border-top:1px solid rgba(245,197,24,0.2);border-bottom:1px solid rgba(245,197,24,0.2);padding:3rem 2rem;text-align:center;">
+  <p style="font-family:Boogaloo,cursive;font-size:clamp(1.5rem,4vw,2.5rem);color:#fff;margin-bottom:.5rem;">🏆 Year-End Tournament</p>
+  <p style="color:#aaa;max-width:480px;margin:0 auto 1.5rem;font-size:.95rem;">Double elimination across all four divisions — spread over 4 weeks so nobody grinds 5 nights straight.</p>
+  <a href="tournament.html" style="display:inline-block;background:var(--gold);color:#111;font-family:Nunito,sans-serif;font-weight:800;font-size:1rem;padding:.75rem 2rem;border-radius:8px;text-decoration:none;">View Tournament Schedule →</a>
+</div>
 
 <!-- FOOTER -->
 <footer>
