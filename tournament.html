@@ -9,16 +9,15 @@
 <style>
   :root {
     --gold: #f5c518;
-    --green: #1a7a3c;
     --dark: #111;
     --card: #1a1a1a;
     --border: #ffffff12;
     --a: #f5c518;
-    --b: #4caf6e;
-    --c: #66aaff;
-    --d: #bb88ff;
+    --b: #ff8c42;
+    --c: #4caf6e;
+    --d: #66aaff;
+    --e: #bb88ff;
   }
-
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body { font-family: 'Nunito', sans-serif; background: var(--dark); color: #ddd; overflow-x: hidden; }
 
@@ -26,14 +25,14 @@
     position: sticky; top: 0; z-index: 100;
     display: flex; align-items: center; justify-content: space-between;
     padding: .9rem 2rem;
-    background: rgba(10,10,10,0.92);
-    backdrop-filter: blur(12px);
+    background: rgba(10,10,10,0.92); backdrop-filter: blur(12px);
     border-bottom: 1px solid var(--border);
   }
   .nav-logo { font-family: 'Boogaloo', cursive; font-size: 1.4rem; color: var(--gold); text-decoration: none; }
   .nav-back { color: #aaa; text-decoration: none; font-weight: 700; font-size: .9rem; transition: color .2s; }
   .nav-back:hover { color: var(--gold); }
 
+  /* HERO */
   .hero {
     text-align: center; padding: 5rem 2rem 3rem;
     background: radial-gradient(ellipse at 50% 0%, rgba(26,122,60,0.25) 0%, transparent 60%), #0d0d0d;
@@ -43,112 +42,186 @@
   .hero-badge { display: inline-block; background: var(--gold); color: #111; font-weight: 800; font-size: .75rem; letter-spacing: .12em; text-transform: uppercase; padding: .3rem .9rem; border-radius: 99px; margin-bottom: 1.2rem; }
   .hero h1 { font-family: 'Boogaloo', cursive; font-size: clamp(2.5rem, 7vw, 5rem); color: #fff; line-height: 1; margin-bottom: .75rem; }
   .hero h1 span { color: var(--gold); }
-  .hero p { color: #aaa; max-width: 600px; margin: 0 auto; font-size: 1rem; line-height: 1.7; }
+  .hero p { color: #aaa; max-width: 640px; margin: 0 auto; font-size: 1rem; line-height: 1.7; }
 
-  .container { max-width: 1200px; margin: 0 auto; padding: 2.5rem 2rem; }
+  .container { max-width: 1100px; margin: 0 auto; padding: 2.5rem 2rem; }
 
-  .summary-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 1rem; margin-bottom: 2rem; }
-  .summary-card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 1.25rem 1.5rem; border-top: 3px solid; }
-  .summary-card.a { border-top-color: var(--a); }
-  .summary-card.b { border-top-color: var(--b); }
-  .summary-card.c { border-top-color: var(--c); }
-  .summary-card.d { border-top-color: var(--d); }
-  .summary-card h3 { font-family: 'Boogaloo', cursive; font-size: 1.4rem; margin-bottom: .2rem; }
-  .summary-card.a h3 { color: var(--a); }
-  .summary-card.b h3 { color: var(--b); }
-  .summary-card.c h3 { color: var(--c); }
-  .summary-card.d h3 { color: var(--d); }
-  .summary-card .big { font-family: 'Boogaloo', cursive; font-size: 2rem; color: #fff; }
-  .summary-card p { font-size: .8rem; color: #777; margin-top: .25rem; line-height: 1.5; }
+  .sec-title { font-family: 'Boogaloo', cursive; font-size: clamp(1.6rem, 4vw, 2.4rem); color: #fff; margin-bottom: .4rem; }
+  .sec-title span { color: var(--gold); }
+  .bar { width: 48px; height: 3px; background: var(--gold); border-radius: 2px; margin-bottom: 1.75rem; }
 
-  .totals-bar {
-    display: flex; gap: 2rem; flex-wrap: wrap;
-    background: var(--card); border: 1px solid var(--border);
-    border-radius: 12px; padding: 1.25rem 1.5rem;
-    margin-bottom: 2rem; align-items: center;
+  /* ── SEEDING ── */
+  .seeding-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 3rem; }
+  @media(max-width:640px){ .seeding-wrap { grid-template-columns: 1fr; } }
+  .seeding-card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 1.25rem 1.5rem; }
+  .seeding-card h3 { font-family: 'Boogaloo', cursive; font-size: 1.15rem; color: var(--gold); margin-bottom: .75rem; }
+  .seed-row { display: flex; align-items: center; justify-content: space-between; padding: .45rem 0; border-bottom: 1px solid #ffffff07; font-size: .86rem; }
+  .seed-row:last-child { border-bottom: none; }
+  .seed-place { color: #777; font-weight: 700; }
+  .dtag { display: inline-block; padding: .18rem .55rem; border-radius: 5px; font-weight: 800; font-size: .75rem; }
+  .tag-a { background: rgba(245,197,24,0.15); color: var(--a); }
+  .tag-b { background: rgba(255,140,66,0.15); color: var(--b); }
+  .tag-c { background: rgba(76,175,110,0.15); color: var(--c); }
+  .tag-d { background: rgba(102,170,255,0.15); color: var(--d); }
+  .tag-e { background: rgba(187,136,255,0.15); color: var(--e); }
+
+  /* ── DIVISION CARDS ── */
+  .div-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 1rem; margin-bottom: 3rem; }
+  .div-card { background: var(--card); border: 1px solid var(--border); border-top: 3px solid; border-radius: 12px; padding: 1.25rem 1.5rem; }
+  .div-card.a { border-top-color: var(--a); } .div-card.b { border-top-color: var(--b); }
+  .div-card.c { border-top-color: var(--c); } .div-card.d { border-top-color: var(--d); }
+  .div-card.e { border-top-color: var(--e); }
+  .div-card h3 { font-family: 'Boogaloo', cursive; font-size: 1.5rem; }
+  .div-card.a h3 { color: var(--a); } .div-card.b h3 { color: var(--b); }
+  .div-card.c h3 { color: var(--c); } .div-card.d h3 { color: var(--d); }
+  .div-card.e h3 { color: var(--e); }
+  .div-card .teams { font-family: 'Boogaloo', cursive; font-size: 1.9rem; color: #fff; line-height: 1.1; }
+  .div-card .desc { font-size: .78rem; color: #666; margin-top: .3rem; line-height: 1.5; }
+
+  /* ── PRIZES ── */
+  .prize-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1rem; margin-bottom: 1rem; }
+  .prize-card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 1.5rem; text-align: center; transition: transform .2s; }
+  .prize-card:hover { transform: translateY(-3px); }
+  .prize-card.gold { border-color: rgba(245,197,24,0.4); background: rgba(245,197,24,0.04); }
+  .prize-amt { font-family: 'Boogaloo', cursive; font-size: 2.8rem; color: var(--gold); line-height: 1; }
+  .prize-card:not(.gold) .prize-amt { color: #aaa; font-size: 2.2rem; }
+  .prize-lbl { font-size: .85rem; color: #888; margin-top: .3rem; font-weight: 700; }
+  .prize-note { font-size: .75rem; color: #555; margin-top: .2rem; }
+  .prize-total-bar { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 1rem 1.5rem; margin-bottom: 3rem; text-align: center; font-size: .9rem; color: #666; }
+  .prize-total-bar span { color: var(--gold); font-weight: 800; font-size: 1.1rem; }
+
+  /* ── CHAMPIONSHIP BRACKET ── */
+  .bracket-outer { overflow-x: auto; padding-bottom: .5rem; margin-bottom: 2rem; }
+  .bracket {
+    min-width: 680px; display: grid;
+    grid-template-columns: 1fr 60px 200px 60px 1fr;
+    align-items: center; gap: 0;
+    padding: 2rem; background: var(--card);
+    border: 1px solid var(--border); border-radius: 16px;
   }
-  .total-item { text-align: center; }
-  .total-item .num { font-family: 'Boogaloo', cursive; font-size: 2rem; color: var(--gold); line-height: 1; }
-  .total-item .lbl { font-size: .75rem; color: #666; text-transform: uppercase; letter-spacing: .08em; font-weight: 700; }
-  .totals-bar .note { margin-left: auto; font-size: .85rem; color: #666; max-width: 320px; line-height: 1.5; }
+  .b-col { display: flex; flex-direction: column; gap: 2.5rem; }
+  .b-col.mid { gap: 1.5rem; }
+  .b-match { background: #222; border-radius: 10px; border: 1px solid #ffffff12; overflow: hidden; }
+  .b-match-hdr { font-size: .68rem; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; padding: .4rem .8rem; background: #2a2a2a; color: #555; }
+  .b-team { padding: .55rem .8rem; font-weight: 700; font-size: .86rem; display: flex; align-items: center; gap: .5rem; border-bottom: 1px solid #ffffff08; }
+  .b-team:last-child { border-bottom: none; }
+  .b-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+  .b-connector { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: .4rem; color: #2a2a2a; font-size: 1.4rem; }
+  .b-connector .lbl { font-size: .65rem; color: #3a3a3a; font-weight: 800; text-align: center; letter-spacing: .06em; line-height: 1.4; }
+  .b-final { border-radius: 12px; overflow: hidden; border: 2px solid; }
+  .b-final.f10 { border-color: var(--gold); background: rgba(245,197,24,0.05); }
+  .b-final.f5  { border-color: #555; background: rgba(255,255,255,0.02); }
+  .b-final-hdr { padding: .5rem 1rem; font-size: .72rem; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
+  .b-final.f10 .b-final-hdr { background: rgba(245,197,24,0.15); color: var(--gold); }
+  .b-final.f5  .b-final-hdr { background: rgba(255,255,255,0.05); color: #777; }
+  .b-final-amt { font-family: 'Boogaloo', cursive; text-align: center; padding: 1rem .5rem .25rem; line-height: 1; }
+  .b-final.f10 .b-final-amt { font-size: 3rem; color: var(--gold); }
+  .b-final.f5  .b-final-amt { font-size: 2.2rem; color: #aaa; }
+  .b-final-sub { font-size: .75rem; text-align: center; padding: .25rem .75rem .9rem; color: #555; }
+  .champ-note { background: rgba(245,197,24,0.06); border: 1px solid rgba(245,197,24,0.15); border-radius: 10px; padding: 1rem 1.5rem; margin-bottom: 3rem; font-size: .88rem; color: #aaa; line-height: 1.7; }
+  .champ-note strong { color: var(--gold); }
 
-  .format-note {
-    background: rgba(26,122,60,0.1); border: 1px solid rgba(26,122,60,0.25);
-    border-radius: 12px; padding: 1.25rem 1.5rem;
-    margin-bottom: 2.5rem; font-size: .88rem; line-height: 1.7; color: #bbb;
+  /* ── HOW IT RUNS NOTE ── */
+  .how-it-runs {
+    background: rgba(76,175,110,0.08);
+    border: 1px solid rgba(76,175,110,0.2);
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-bottom: 2.5rem;
+    font-size: .9rem;
+    line-height: 1.8;
+    color: #bbb;
   }
-  .format-note strong { color: #4caf6e; }
+  .how-it-runs strong { color: #4caf6e; }
+  .how-it-runs .title { font-family: 'Boogaloo', cursive; font-size: 1.2rem; color: #4caf6e; margin-bottom: .5rem; }
 
-  .div-pills { display: flex; gap: .6rem; justify-content: center; flex-wrap: wrap; margin-bottom: 2rem; }
-  .div-pill { padding: .4rem 1.1rem; border-radius: 99px; font-weight: 800; font-size: .85rem; border: 2px solid; cursor: pointer; transition: all .2s; }
-  .div-pill.all { border-color: #555; color: #aaa; }
-  .div-pill.pa { border-color: var(--a); color: var(--a); }
-  .div-pill.pb { border-color: var(--b); color: var(--b); }
-  .div-pill.pc { border-color: var(--c); color: var(--c); }
-  .div-pill.pd { border-color: var(--d); color: var(--d); }
-  .div-pill.all.active, .div-pill.all:hover { background: #aaa; border-color: #aaa; color: #111; }
-  .div-pill.pa.active, .div-pill.pa:hover { background: var(--a); color: #111; }
-  .div-pill.pb.active, .div-pill.pb:hover { background: var(--b); color: #111; }
-  .div-pill.pc.active, .div-pill.pc:hover { background: var(--c); color: #111; }
-  .div-pill.pd.active, .div-pill.pd:hover { background: var(--d); color: #111; }
-
-  .legend {
-    display: flex; gap: 1.5rem; flex-wrap: wrap;
-    background: var(--card); border: 1px solid var(--border);
-    border-radius: 12px; padding: 1rem 1.5rem;
-    margin-bottom: 2.5rem; align-items: center;
+  /* ── PHASE BLOCKS ── */
+  .phase-block {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    overflow: hidden;
+    margin-bottom: 1.5rem;
+    transition: border-color .2s;
   }
-  .legend-item { display: flex; align-items: center; gap: .5rem; font-size: .83rem; font-weight: 700; }
-  .legend-dot { width: 12px; height: 12px; border-radius: 3px; }
-  .legend-note { margin-left: auto; font-size: .78rem; color: #555; }
+  .phase-block:hover { border-color: #ffffff20; }
 
-  .week-block { margin-bottom: 3.5rem; }
-  .week-header { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.25rem; }
-  .week-label { font-family: 'Boogaloo', cursive; font-size: 2rem; color: #fff; white-space: nowrap; }
-  .week-sub { font-size: .85rem; color: #555; font-weight: 600; white-space: nowrap; }
-  .week-divider { flex: 1; height: 1px; background: var(--border); }
-
-  .nights-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: .75rem; }
-  @media (max-width: 900px) { .nights-grid { grid-template-columns: repeat(3, 1fr); } }
-  @media (max-width: 580px) { .nights-grid { grid-template-columns: repeat(2, 1fr); } }
-
-  .night-card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; transition: transform .2s; }
-  .night-card:hover { transform: translateY(-3px); }
-  .night-card.champ { border-color: rgba(245,197,24,0.5); background: rgba(245,197,24,0.03); }
-
-  .night-header {
-    padding: .55rem 1rem; font-size: .72rem; font-weight: 800;
-    letter-spacing: .08em; text-transform: uppercase;
-    background: #222; color: #666;
-    display: flex; justify-content: space-between; align-items: center;
+  .phase-header {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    padding: 1.25rem 1.5rem;
+    background: #1e1e1e;
+    border-bottom: 1px solid var(--border);
+    flex-wrap: wrap;
   }
-  .night-card.champ .night-header { background: rgba(245,197,24,0.12); color: var(--gold); }
-  .night-tables { font-size: .68rem; color: #444; font-weight: 700; }
-  .night-card.champ .night-tables { color: rgba(245,197,24,0.5); }
-  .night-matches { padding: .75rem; display: flex; flex-direction: column; gap: .5rem; }
 
-  .match-chip { border-radius: 8px; padding: .6rem .75rem; border-left: 3px solid; transition: opacity .25s; overflow: hidden; }
-  .match-chip.da { background: rgba(245,197,24,0.07); border-color: var(--a); }
-  .match-chip.db { background: rgba(76,175,110,0.07); border-color: var(--b); }
-  .match-chip.dc { background: rgba(102,170,255,0.07); border-color: var(--c); }
-  .match-chip.dd { background: rgba(187,136,255,0.07); border-color: var(--d); }
-  .match-chip.gf { background: rgba(245,197,24,0.12); border-color: var(--gold); }
-  .match-chip.off { background: #161616; border-color: #2a2a2a; }
+  .phase-num {
+    font-family: 'Boogaloo', cursive;
+    font-size: 2.5rem;
+    color: #333;
+    line-height: 1;
+    min-width: 44px;
+  }
 
-  .chip-div { font-size: .68rem; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; margin-bottom: .2rem; }
-  .da .chip-div { color: var(--a); }
-  .db .chip-div { color: var(--b); }
-  .dc .chip-div { color: var(--c); }
-  .dd .chip-div { color: var(--d); }
-  .gf .chip-div { color: var(--gold); }
-  .off .chip-div { color: #333; }
+  .phase-title-wrap { flex: 1; }
+  .phase-title { font-family: 'Boogaloo', cursive; font-size: 1.5rem; color: #fff; }
+  .phase-subtitle { font-size: .82rem; color: #555; margin-top: .1rem; }
 
-  .chip-round { font-weight: 700; color: #ddd; font-size: .83rem; line-height: 1.3; }
-  .off .chip-round { color: #333; }
-  .chip-count { font-size: .72rem; color: #555; margin-top: .15rem; }
-  .chip-time { font-size: .7rem; color: #444; margin-top: .1rem; }
+  .phase-tags { display: flex; gap: .5rem; flex-wrap: wrap; margin-left: auto; }
+  .phase-tag { display: flex; align-items: center; gap: .35rem; padding: .25rem .7rem; border-radius: 99px; font-size: .75rem; font-weight: 800; border: 1.5px solid; }
+  .phase-tag.ta { border-color: rgba(245,197,24,0.4); color: var(--a); }
+  .phase-tag.tb { border-color: rgba(255,140,66,0.4); color: var(--b); }
+  .phase-tag.tc { border-color: rgba(76,175,110,0.4); color: var(--c); }
+  .phase-tag.td { border-color: rgba(102,170,255,0.4); color: var(--d); }
+  .phase-tag.te { border-color: rgba(187,136,255,0.4); color: var(--e); }
+  .phase-tag.tg { border-color: rgba(245,197,24,0.6); color: var(--gold); background: rgba(245,197,24,0.06); }
 
-  .match-chip.hidden { opacity: 0; max-height: 0 !important; padding: 0 !important; margin: 0 !important; border: none !important; pointer-events: none; }
+  .phase-body { padding: 1.25rem 1.5rem; display: flex; flex-direction: column; gap: 1rem; }
+
+  .phase-row {
+    display: grid;
+    grid-template-columns: 160px 1fr auto;
+    gap: 1rem;
+    align-items: start;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #ffffff07;
+  }
+  .phase-row:last-child { border-bottom: none; padding-bottom: 0; }
+  @media(max-width:640px){ .phase-row { grid-template-columns: 1fr; } }
+
+  .phase-div-label {
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+    font-weight: 800;
+    font-size: .9rem;
+  }
+  .phase-div-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+
+  .phase-rounds { font-size: .85rem; color: #bbb; line-height: 1.6; }
+  .phase-rounds span { color: #666; font-size: .8rem; }
+
+  .phase-matches {
+    text-align: right;
+    font-family: 'Boogaloo', cursive;
+    font-size: 1.3rem;
+    color: #555;
+    white-space: nowrap;
+  }
+  .phase-matches small { display: block; font-family: 'Nunito', sans-serif; font-size: .7rem; color: #444; font-weight: 700; }
+
+  .phase-note {
+    background: rgba(255,255,255,0.03);
+    border-radius: 8px;
+    padding: .75rem 1rem;
+    font-size: .82rem;
+    color: #666;
+    line-height: 1.6;
+    border-left: 3px solid #ffffff10;
+  }
+  .phase-note.green { border-left-color: rgba(76,175,110,0.4); color: #aaa; }
+  .phase-note.gold { border-left-color: rgba(245,197,24,0.4); color: #aaa; }
 
   footer { text-align: center; padding: 3rem 2rem; border-top: 1px solid var(--border); color: #444; font-size: .85rem; }
 </style>
@@ -163,466 +236,251 @@
 <div class="hero">
   <div class="hero-badge">🏆 Annual Championship</div>
   <h1>Year-End <span>Tournament</span></h1>
-  <p>Full double elimination across all four divisions. 84 total matches spread over 4 weeks — 10 tables, 1 match per table per night. No group grinds 5 nights straight.</p>
+  <p>Five divisions seeded by skill. Double elimination throughout. Every open table gets used — no division waits around while tables sit empty. A C or D team can walk away with $10k.</p>
 </div>
 
 <div class="container">
 
-  <div class="summary-grid">
-    <div class="summary-card a">
-      <h3>Division A</h3>
-      <div class="big">8 Teams</div>
-      <p>17 total matches<br>Top teams from the area</p>
+  <!-- HOW IT RUNS -->
+  <div class="how-it-runs">
+    <div class="title">🎱 How Z Runs It</div>
+    The organizer fills every available table every night. As teams get eliminated, tables open up and the next division's matches bleed in. C bracket (all 16 teams) runs first — by mid-week, open tables from C eliminations get filled with D bracket matches. This means roughly <strong>2.5 divisions run simultaneously</strong> by the end of each week. Nobody sits around, no tables go to waste, and no single group grinds 5 nights in a row.
+  </div>
+
+  <!-- SEEDING -->
+  <h2 class="sec-title">How <span>Seeding Works</span></h2>
+  <div class="bar"></div>
+  <div class="seeding-wrap">
+    <div class="seeding-card">
+      <h3>📍 From Each League Division</h3>
+      <div class="seed-row"><span class="seed-place">1st &amp; 2nd place</span><span class="dtag tag-a">Division A</span></div>
+      <div class="seed-row"><span class="seed-place">3rd &amp; 4th place</span><span class="dtag tag-b">Division B</span></div>
+      <div class="seed-row"><span class="seed-place">Middle of standings</span><span class="dtag tag-c">Division C</span></div>
+      <div class="seed-row"><span class="seed-place">3rd &amp; 2nd from last</span><span class="dtag tag-d">Division D</span></div>
+      <div class="seed-row"><span class="seed-place">Last place</span><span class="dtag tag-e">Division E</span></div>
     </div>
-    <div class="summary-card b">
-      <h3>Division B</h3>
-      <div class="big">16 Teams</div>
-      <p>33 total matches<br>Largest bracket</p>
-    </div>
-    <div class="summary-card c">
-      <h3>Division C</h3>
-      <div class="big">8 Teams</div>
-      <p>17 total matches<br>Mid-tier bracket</p>
-    </div>
-    <div class="summary-card d">
-      <h3>Division D</h3>
-      <div class="big">8 Teams</div>
-      <p>17 total matches<br>Entry-level bracket</p>
+    <div class="seeding-card">
+      <h3>🗓️ The 4 Weekly Leagues</h3>
+      <div class="seed-row"><span class="seed-place">Tuesday</span><span style="color:#aaa;font-size:.85rem;">Garfield Area</span></div>
+      <div class="seed-row"><span class="seed-place">Wednesday</span><span style="color:#aaa;font-size:.85rem;">Strongsville / Brunswick</span></div>
+      <div class="seed-row"><span class="seed-place">Wednesday</span><span style="color:#aaa;font-size:.85rem;">Parma</span></div>
+      <div class="seed-row"><span class="seed-place">Thursday</span><span style="color:#aaa;font-size:.85rem;">Parma</span></div>
+      <div class="seed-row" style="padding-top:.65rem;">
+        <span style="font-size:.78rem;color:#555;line-height:1.5;">C bracket is split into Upper C and Lower C by the organizer based on skill level — but there is still only <strong style="color:#888;">one C champion</strong>.</span>
+      </div>
     </div>
   </div>
 
-  <div class="totals-bar">
-    <div class="total-item"><div class="num">84</div><div class="lbl">Total Matches</div></div>
-    <div class="total-item"><div class="num">10</div><div class="lbl">Tables / Night</div></div>
-    <div class="total-item"><div class="num">4</div><div class="lbl">Weeks</div></div>
-    <div class="total-item"><div class="num">19</div><div class="lbl">Match Nights</div></div>
-    <div class="total-item"><div class="num">2–5h</div><div class="lbl">Per Match</div></div>
-    <div class="note">1 match per table per night. Up to 10 simultaneous matches. No division plays more than 3 nights in any single week.</div>
+  <!-- DIVISIONS -->
+  <h2 class="sec-title">Tournament <span>Divisions</span></h2>
+  <div class="bar"></div>
+  <div class="div-grid">
+    <div class="div-card a"><h3>Division A</h3><div class="teams">8 Teams</div><div class="desc">Top 2 from each league. Elite tier.</div></div>
+    <div class="div-card b"><h3>Division B</h3><div class="teams">~8 Teams</div><div class="desc">3rd &amp; 4th from each league.</div></div>
+    <div class="div-card c"><h3>Division C</h3><div class="teams">~16 Teams</div><div class="desc">90% of the league. Split Upper/Lower by Z. One C champion.</div></div>
+    <div class="div-card d"><h3>Division D</h3><div class="teams">8 Teams</div><div class="desc">2nd &amp; 3rd from last in each league.</div></div>
+    <div class="div-card e"><h3>Division E</h3><div class="teams">4 Teams</div><div class="desc">Last place from each league. Separate cash prize. Runs independently.</div></div>
   </div>
 
-  <div class="format-note">
-    <strong>Double Elimination:</strong> Every team needs two losses to be eliminated. WB teams drop to the LB after their first loss. The WB champion faces the LB champion in the Grand Final. Early rounds share nights across divisions to keep tables busy. Finals week gives each Grand Final its own featured night — all converging on the Championship Party on Friday.
-  </div>
-
-  <div class="div-pills">
-    <div class="div-pill all active" onclick="filterDiv('all')">All Divisions</div>
-    <div class="div-pill pa" onclick="filterDiv('a')">Division A</div>
-    <div class="div-pill pb" onclick="filterDiv('b')">Division B</div>
-    <div class="div-pill pc" onclick="filterDiv('c')">Division C</div>
-    <div class="div-pill pd" onclick="filterDiv('d')">Division D</div>
-  </div>
-
-  <div class="legend">
-    <div class="legend-item"><div class="legend-dot" style="background:var(--a)"></div>Division A</div>
-    <div class="legend-item"><div class="legend-dot" style="background:var(--b)"></div>Division B</div>
-    <div class="legend-item"><div class="legend-dot" style="background:var(--c)"></div>Division C</div>
-    <div class="legend-item"><div class="legend-dot" style="background:var(--d)"></div>Division D</div>
-    <div class="legend-note">WB = Winners Bracket &nbsp;·&nbsp; LB = Losers Bracket &nbsp;·&nbsp; GF = Grand Final</div>
-  </div>
-
-  <!-- WEEK 1 — 40 matches -->
-  <!-- Mon: B WB R1 (8)                              = 8 tables -->
-  <!-- Tue: A WB R1 (4) + C WB R1 (4)               = 8 tables -->
-  <!-- Wed: D WB R1 (4) + B LB R1 pt1 (4)           = 8 tables -->
-  <!-- Thu: B LB R1 pt2 (4) + A LB R1 (4)           = 8 tables -->
-  <!-- Fri: C LB R1 (4) + D LB R1 (4)               = 8 tables -->
-  <div class="week-block">
-    <div class="week-header">
-      <div class="week-label">Week 1</div>
-      <div class="week-sub">Opening Rounds · 40 matches</div>
-      <div class="week-divider"></div>
+  <!-- PRIZES -->
+  <h2 class="sec-title">Prize <span>Money</span></h2>
+  <div class="bar"></div>
+  <div class="prize-grid">
+    <div class="prize-card gold">
+      <div class="prize-amt">$10,000</div>
+      <div class="prize-lbl">🏆 Championship Winner</div>
+      <div class="prize-note">Winner of the $10k final match</div>
     </div>
-    <div class="nights-grid">
-      <div class="night-card">
-        <div class="night-header">Monday <span class="night-tables">8/10 tables</span></div>
-        <div class="night-matches">
-          <div class="match-chip db" data-div="b">
-            <div class="chip-div">Division B</div>
-            <div class="chip-round">WB Round 1</div>
-            <div class="chip-count">8 matches · 8 tables</div>
-            <div class="chip-time">2–5 hrs per match</div>
-          </div>
+    <div class="prize-card">
+      <div class="prize-amt">$5,000</div>
+      <div class="prize-lbl">Championship Runner-Up</div>
+      <div class="prize-note">Winner of the $5k consolation final</div>
+    </div>
+    <div class="prize-card">
+      <div class="prize-amt">$1,000</div>
+      <div class="prize-lbl">Each Division Runner-Up</div>
+      <div class="prize-note">A, B, C, and D runner-ups each get $1k</div>
+    </div>
+    <div class="prize-card">
+      <div class="prize-amt">$500–1k</div>
+      <div class="prize-lbl">Division E Winner</div>
+      <div class="prize-note">Separate cash pool, runs independently</div>
+    </div>
+  </div>
+  <div class="prize-total-bar">Estimated total prize pool: <span>~$19,500–20,000</span></div>
+
+  <!-- CHAMPIONSHIP BRACKET -->
+  <h2 class="sec-title">Championship <span>Bracket</span></h2>
+  <div class="bar"></div>
+  <div class="champ-note">
+    <strong>One match decides everything.</strong> The four division winners are paired — A vs B and C vs D. Each is a single game. Winners meet in the $10k final, losers play for $5k. Any division can win. A hot C or D team can knock out A or B and take home the biggest prize. 🎱
+  </div>
+  <div class="bracket-outer">
+    <div class="bracket">
+      <div class="b-col">
+        <div class="b-match">
+          <div class="b-match-hdr">Semifinal 1</div>
+          <div class="b-team"><div class="b-dot" style="background:var(--a)"></div><span style="color:var(--a)">Division A Champion</span></div>
+          <div class="b-team"><div class="b-dot" style="background:var(--b)"></div><span style="color:var(--b)">Division B Champion</span></div>
+        </div>
+        <div class="b-match">
+          <div class="b-match-hdr">Semifinal 2</div>
+          <div class="b-team"><div class="b-dot" style="background:var(--c)"></div><span style="color:var(--c)">Division C Champion</span></div>
+          <div class="b-team"><div class="b-dot" style="background:var(--d)"></div><span style="color:var(--d)">Division D Champion</span></div>
         </div>
       </div>
-      <div class="night-card">
-        <div class="night-header">Tuesday <span class="night-tables">8/10 tables</span></div>
-        <div class="night-matches">
-          <div class="match-chip da" data-div="a">
-            <div class="chip-div">Division A</div>
-            <div class="chip-round">WB Round 1</div>
-            <div class="chip-count">4 matches · 4 tables</div>
-            <div class="chip-time">2–5 hrs per match</div>
-          </div>
-          <div class="match-chip dc" data-div="c">
-            <div class="chip-div">Division C</div>
-            <div class="chip-round">WB Round 1</div>
-            <div class="chip-count">4 matches · 4 tables</div>
-            <div class="chip-time">2–5 hrs per match</div>
-          </div>
+      <div class="b-connector">
+        <div>→</div><div class="lbl">Winner<br>advances</div>
+        <div style="margin-top:1.5rem">→</div><div class="lbl">Loser to<br>$5k match</div>
+      </div>
+      <div class="b-col mid">
+        <div class="b-final f10">
+          <div class="b-final-hdr">🏆 $10,000 Final</div>
+          <div class="b-final-amt">$10,000</div>
+          <div class="b-final-sub">SF1 winner vs SF2 winner · Single match</div>
+        </div>
+        <div class="b-final f5">
+          <div class="b-final-hdr">$5,000 Final</div>
+          <div class="b-final-amt">$5,000</div>
+          <div class="b-final-sub">SF1 loser vs SF2 loser · Single match</div>
         </div>
       </div>
-      <div class="night-card">
-        <div class="night-header">Wednesday <span class="night-tables">8/10 tables</span></div>
-        <div class="night-matches">
-          <div class="match-chip dd" data-div="d">
-            <div class="chip-div">Division D</div>
-            <div class="chip-round">WB Round 1</div>
-            <div class="chip-count">4 matches · 4 tables</div>
-            <div class="chip-time">2–5 hrs per match</div>
-          </div>
-          <div class="match-chip db" data-div="b">
-            <div class="chip-div">Division B</div>
-            <div class="chip-round">LB Round 1 (pt. 1)</div>
-            <div class="chip-count">4 matches · 4 tables</div>
-            <div class="chip-time">2–5 hrs per match</div>
-          </div>
-        </div>
+      <div class="b-connector">
+        <div style="transform:rotate(180deg)">→</div>
+        <div class="lbl">SF losers<br>play here</div>
       </div>
-      <div class="night-card">
-        <div class="night-header">Thursday <span class="night-tables">8/10 tables</span></div>
-        <div class="night-matches">
-          <div class="match-chip db" data-div="b">
-            <div class="chip-div">Division B</div>
-            <div class="chip-round">LB Round 1 (pt. 2)</div>
-            <div class="chip-count">4 matches · 4 tables</div>
-            <div class="chip-time">2–5 hrs per match</div>
-          </div>
-          <div class="match-chip da" data-div="a">
-            <div class="chip-div">Division A</div>
-            <div class="chip-round">LB Round 1</div>
-            <div class="chip-count">4 matches · 4 tables</div>
-            <div class="chip-time">2–5 hrs per match</div>
-          </div>
+      <div class="b-col" style="gap:1rem;">
+        <div style="background:#1e1e1e;border-radius:10px;padding:1rem;border:1px solid #ffffff0a;font-size:.82rem;color:#666;line-height:1.6;">
+          <div style="color:var(--gold);font-weight:800;margin-bottom:.4rem;font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;">The Beauty of This Format</div>
+          Nobody is handed the big money. A C or D champion can knock out an A or B team in one game and walk away with $10k. 🎱
         </div>
-      </div>
-      <div class="night-card">
-        <div class="night-header">Friday <span class="night-tables">8/10 tables</span></div>
-        <div class="night-matches">
-          <div class="match-chip dc" data-div="c">
-            <div class="chip-div">Division C</div>
-            <div class="chip-round">LB Round 1</div>
-            <div class="chip-count">4 matches · 4 tables</div>
-            <div class="chip-time">2–5 hrs per match</div>
-          </div>
-          <div class="match-chip dd" data-div="d">
-            <div class="chip-div">Division D</div>
-            <div class="chip-round">LB Round 1</div>
-            <div class="chip-count">4 matches · 4 tables</div>
-            <div class="chip-time">2–5 hrs per match</div>
-          </div>
+        <div style="background:#1e1e1e;border-radius:10px;padding:1rem;border:1px solid #ffffff0a;font-size:.82rem;color:#666;line-height:1.6;">
+          <div style="color:#aaa;font-weight:800;margin-bottom:.4rem;font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;">Also Paying Out</div>
+          Runner-up in A, B, C, D each receive <strong style="color:#aaa;">$1,000</strong>. Division E winner takes <strong style="color:#aaa;">$500–1k</strong>.
         </div>
       </div>
     </div>
   </div>
 
-  <!-- WEEK 2 — 22 matches -->
-  <!-- Mon: B WB R2 (4) + A WB QF (2) + C WB QF (2) = 8 tables -->
-  <!-- Tue: D WB QF (2) + B LB R2 (4)               = 6 tables -->
-  <!-- Wed: A LB R2 (2) + C LB R2 (2) + D LB R2 (2) = 6 tables -->
-  <!-- Thu: B LB R3 (2)                              = 2 tables -->
-  <!-- Fri: Flex / makeup night                               -->
-  <div class="week-block">
-    <div class="week-header">
-      <div class="week-label">Week 2</div>
-      <div class="week-sub">Quarterfinals · 22 matches</div>
-      <div class="week-divider"></div>
+  <!-- PHASES -->
+  <h2 class="sec-title">Tournament <span>Phases</span></h2>
+  <div class="bar"></div>
+
+  <!-- PHASE 1 -->
+  <div class="phase-block">
+    <div class="phase-header">
+      <div class="phase-num">01</div>
+      <div class="phase-title-wrap">
+        <div class="phase-title">C Bracket Week</div>
+        <div class="phase-subtitle">~1 week · All 16 C teams run double elimination · D bleeds in as tables open</div>
+      </div>
+      <div class="phase-tags">
+        <div class="phase-tag tc">C Upper</div>
+        <div class="phase-tag tc">C Lower</div>
+        <div class="phase-tag td">D starts late</div>
+      </div>
     </div>
-    <div class="nights-grid">
-      <div class="night-card">
-        <div class="night-header">Monday <span class="night-tables">8/10 tables</span></div>
-        <div class="night-matches">
-          <div class="match-chip db" data-div="b">
-            <div class="chip-div">Division B</div>
-            <div class="chip-round">WB Round 2</div>
-            <div class="chip-count">4 matches · 4 tables</div>
-            <div class="chip-time">2–5 hrs per match</div>
-          </div>
-          <div class="match-chip da" data-div="a">
-            <div class="chip-div">Division A</div>
-            <div class="chip-round">WB Quarterfinals</div>
-            <div class="chip-count">2 matches · 2 tables</div>
-            <div class="chip-time">2–5 hrs per match</div>
-          </div>
-          <div class="match-chip dc" data-div="c">
-            <div class="chip-div">Division C</div>
-            <div class="chip-round">WB Quarterfinals</div>
-            <div class="chip-count">2 matches · 2 tables</div>
-            <div class="chip-time">2–5 hrs per match</div>
-          </div>
-        </div>
+    <div class="phase-body">
+      <div class="phase-row">
+        <div class="phase-div-label"><div class="phase-div-dot" style="background:var(--c)"></div><span style="color:var(--c)">Division C — Upper</span></div>
+        <div class="phase-rounds">Full double elimination · WB R1 → WB Final · LB R1 → LB Final → Grand Final<br><span>8 teams · ~15 matches · Upper and Lower C run simultaneously</span></div>
+        <div class="phase-matches">~15<small>matches</small></div>
       </div>
-      <div class="night-card">
-        <div class="night-header">Tuesday <span class="night-tables">6/10 tables</span></div>
-        <div class="night-matches">
-          <div class="match-chip dd" data-div="d">
-            <div class="chip-div">Division D</div>
-            <div class="chip-round">WB Quarterfinals</div>
-            <div class="chip-count">2 matches · 2 tables</div>
-            <div class="chip-time">2–5 hrs per match</div>
-          </div>
-          <div class="match-chip db" data-div="b">
-            <div class="chip-div">Division B</div>
-            <div class="chip-round">LB Round 2</div>
-            <div class="chip-count">4 matches · 4 tables</div>
-            <div class="chip-time">2–5 hrs per match</div>
-          </div>
-        </div>
+      <div class="phase-row">
+        <div class="phase-div-label"><div class="phase-div-dot" style="background:var(--c)"></div><span style="color:var(--c)">Division C — Lower</span></div>
+        <div class="phase-rounds">Full double elimination · WB R1 → WB Final · LB R1 → LB Final → Grand Final<br><span>8 teams · ~15 matches · Upper C winner vs Lower C winner = C Champion</span></div>
+        <div class="phase-matches">~15<small>matches</small></div>
       </div>
-      <div class="night-card">
-        <div class="night-header">Wednesday <span class="night-tables">6/10 tables</span></div>
-        <div class="night-matches">
-          <div class="match-chip da" data-div="a">
-            <div class="chip-div">Division A</div>
-            <div class="chip-round">LB Round 2</div>
-            <div class="chip-count">2 matches · 2 tables</div>
-            <div class="chip-time">2–5 hrs per match</div>
-          </div>
-          <div class="match-chip dc" data-div="c">
-            <div class="chip-div">Division C</div>
-            <div class="chip-round">LB Round 2</div>
-            <div class="chip-count">2 matches · 2 tables</div>
-            <div class="chip-time">2–5 hrs per match</div>
-          </div>
-          <div class="match-chip dd" data-div="d">
-            <div class="chip-div">Division D</div>
-            <div class="chip-round">LB Round 2</div>
-            <div class="chip-count">2 matches · 2 tables</div>
-            <div class="chip-time">2–5 hrs per match</div>
-          </div>
-        </div>
+      <div class="phase-row">
+        <div class="phase-div-label"><div class="phase-div-dot" style="background:var(--d)"></div><span style="color:var(--d)">Division D</span></div>
+        <div class="phase-rounds">Starts mid-week on open tables as C teams get eliminated<br><span>By Thursday/Friday D is running on every available open table · Continues into Phase 2</span></div>
+        <div class="phase-matches">partial<small>bleeds in</small></div>
       </div>
-      <div class="night-card">
-        <div class="night-header">Thursday <span class="night-tables">2/10 tables</span></div>
-        <div class="night-matches">
-          <div class="match-chip db" data-div="b">
-            <div class="chip-div">Division B</div>
-            <div class="chip-round">LB Round 3</div>
-            <div class="chip-count">2 matches · 2 tables</div>
-            <div class="chip-time">2–5 hrs per match</div>
-          </div>
-        </div>
-      </div>
-      <div class="night-card">
-        <div class="night-header">Friday <span class="night-tables">flex</span></div>
-        <div class="night-matches">
-          <div class="match-chip off" data-div="off">
-            <div class="chip-div">Flex / Makeup Night</div>
-            <div class="chip-round">Buffer for overruns or rescheduled matches</div>
-          </div>
-        </div>
+      <div class="phase-note green">
+        Z splits C into Upper and Lower based on his knowledge of team skill. Both halves run double elimination simultaneously. The two C finalists (one from Upper, one from Lower) meet at the end of the week to crown the overall C Champion.
       </div>
     </div>
   </div>
 
-  <!-- WEEK 3 — 10 matches -->
-  <!-- Mon: B WB SF (2) + A WB SF (1) + C WB SF (1) = 4 tables -->
-  <!-- Tue: D WB SF (1) + B LB R4 (1)               = 2 tables -->
-  <!-- Wed: A LB SF (1) + C LB SF (1) + D LB SF (1) = 3 tables -->
-  <!-- Thu: B LB SF (1)                              = 1 table  -->
-  <!-- Fri: Rest night                                          -->
-  <div class="week-block">
-    <div class="week-header">
-      <div class="week-label">Week 3</div>
-      <div class="week-sub">Semifinals · 10 matches</div>
-      <div class="week-divider"></div>
+  <!-- PHASE 2 -->
+  <div class="phase-block">
+    <div class="phase-header">
+      <div class="phase-num">02</div>
+      <div class="phase-title-wrap">
+        <div class="phase-title">A &amp; B Bracket Week</div>
+        <div class="phase-subtitle">~1 week · A and B run double elimination · D finishes up · E bracket runs</div>
+      </div>
+      <div class="phase-tags">
+        <div class="phase-tag ta">A</div>
+        <div class="phase-tag tb">B</div>
+        <div class="phase-tag td">D finishes</div>
+        <div class="phase-tag te">E runs</div>
+      </div>
     </div>
-    <div class="nights-grid">
-      <div class="night-card">
-        <div class="night-header">Monday <span class="night-tables">4/10 tables</span></div>
-        <div class="night-matches">
-          <div class="match-chip db" data-div="b">
-            <div class="chip-div">Division B</div>
-            <div class="chip-round">WB Semifinals</div>
-            <div class="chip-count">2 matches · 2 tables</div>
-            <div class="chip-time">2–5 hrs per match</div>
-          </div>
-          <div class="match-chip da" data-div="a">
-            <div class="chip-div">Division A</div>
-            <div class="chip-round">WB Semifinals</div>
-            <div class="chip-count">1 match · 1 table</div>
-            <div class="chip-time">2–5 hrs per match</div>
-          </div>
-          <div class="match-chip dc" data-div="c">
-            <div class="chip-div">Division C</div>
-            <div class="chip-round">WB Semifinals</div>
-            <div class="chip-count">1 match · 1 table</div>
-            <div class="chip-time">2–5 hrs per match</div>
-          </div>
-        </div>
+    <div class="phase-body">
+      <div class="phase-row">
+        <div class="phase-div-label"><div class="phase-div-dot" style="background:var(--a)"></div><span style="color:var(--a)">Division A</span></div>
+        <div class="phase-rounds">Full double elimination · WB R1 → WB Final · LB R1 → LB Final → Grand Final<br><span>8 teams · ~15 matches</span></div>
+        <div class="phase-matches">~15<small>matches</small></div>
       </div>
-      <div class="night-card">
-        <div class="night-header">Tuesday <span class="night-tables">2/10 tables</span></div>
-        <div class="night-matches">
-          <div class="match-chip dd" data-div="d">
-            <div class="chip-div">Division D</div>
-            <div class="chip-round">WB Semifinals</div>
-            <div class="chip-count">1 match · 1 table</div>
-            <div class="chip-time">2–5 hrs per match</div>
-          </div>
-          <div class="match-chip db" data-div="b">
-            <div class="chip-div">Division B</div>
-            <div class="chip-round">LB Round 4</div>
-            <div class="chip-count">1 match · 1 table</div>
-            <div class="chip-time">2–5 hrs per match</div>
-          </div>
-        </div>
+      <div class="phase-row">
+        <div class="phase-div-label"><div class="phase-div-dot" style="background:var(--b)"></div><span style="color:var(--b)">Division B</span></div>
+        <div class="phase-rounds">Full double elimination · WB R1 → WB Final · LB R1 → LB Final → Grand Final<br><span>~8 teams · ~15 matches · A and B run simultaneously filling all 10 tables</span></div>
+        <div class="phase-matches">~15<small>matches</small></div>
       </div>
-      <div class="night-card">
-        <div class="night-header">Wednesday <span class="night-tables">3/10 tables</span></div>
-        <div class="night-matches">
-          <div class="match-chip da" data-div="a">
-            <div class="chip-div">Division A</div>
-            <div class="chip-round">LB Semifinals</div>
-            <div class="chip-count">1 match · 1 table</div>
-            <div class="chip-time">2–5 hrs per match</div>
-          </div>
-          <div class="match-chip dc" data-div="c">
-            <div class="chip-div">Division C</div>
-            <div class="chip-round">LB Semifinals</div>
-            <div class="chip-count">1 match · 1 table</div>
-            <div class="chip-time">2–5 hrs per match</div>
-          </div>
-          <div class="match-chip dd" data-div="d">
-            <div class="chip-div">Division D</div>
-            <div class="chip-round">LB Semifinals</div>
-            <div class="chip-count">1 match · 1 table</div>
-            <div class="chip-time">2–5 hrs per match</div>
-          </div>
-        </div>
+      <div class="phase-row">
+        <div class="phase-div-label"><div class="phase-div-dot" style="background:var(--d)"></div><span style="color:var(--d)">Division D</span></div>
+        <div class="phase-rounds">Completes remaining rounds on open tables as A and B eliminations free up tables<br><span>D champion crowned by end of this week</span></div>
+        <div class="phase-matches">finishes<small>open tables</small></div>
       </div>
-      <div class="night-card">
-        <div class="night-header">Thursday <span class="night-tables">1/10 tables</span></div>
-        <div class="night-matches">
-          <div class="match-chip db" data-div="b">
-            <div class="chip-div">Division B</div>
-            <div class="chip-round">LB Semifinals</div>
-            <div class="chip-count">1 match · 1 table</div>
-            <div class="chip-time">2–5 hrs per match</div>
-          </div>
-        </div>
+      <div class="phase-row">
+        <div class="phase-div-label"><div class="phase-div-dot" style="background:var(--e)"></div><span style="color:var(--e)">Division E</span></div>
+        <div class="phase-rounds">Runs its full bracket on available tables during this week<br><span>4 teams · winner takes $500–1k separate cash prize</span></div>
+        <div class="phase-matches">~6<small>matches</small></div>
       </div>
-      <div class="night-card">
-        <div class="night-header">Friday <span class="night-tables">off</span></div>
-        <div class="night-matches">
-          <div class="match-chip off" data-div="off">
-            <div class="chip-div">Rest Night</div>
-            <div class="chip-round">Players rest before Championship Week</div>
-          </div>
-        </div>
+      <div class="phase-note green">
+        Same approach as Phase 1 — Z fills every open table every night. As A and B teams get eliminated, open tables get filled by D's remaining rounds or E bracket matches. No tables sit idle.
       </div>
     </div>
   </div>
 
-  <!-- WEEK 4 — 12 matches (Championship) -->
-  <!-- Mon: C WB Final (1) + D WB Final (1) + C LB Final (1) + D LB Final (1) = 4 -->
-  <!-- Tue: A WB Final (1) + A LB Final (1)           = 2 tables -->
-  <!-- Wed: B WB Final (1) + B LB Final (1)           = 2 tables -->
-  <!-- Thu: All 4 Grand Finals                        = 4 tables -->
-  <!-- Fri: Awards + Championship Party                          -->
-  <div class="week-block">
-    <div class="week-header">
-      <div class="week-label">Week 4</div>
-      <div class="week-sub">🏆 Championship Week · 12 matches</div>
-      <div class="week-divider"></div>
+  <!-- PHASE 3 -->
+  <div class="phase-block">
+    <div class="phase-header">
+      <div class="phase-num">03</div>
+      <div class="phase-title-wrap">
+        <div class="phase-title">💰 Money Week</div>
+        <div class="phase-subtitle">Championship semifinals · $10k final · $5k final · All division runner-ups paid out</div>
+      </div>
+      <div class="phase-tags">
+        <div class="phase-tag tg">$10,000</div>
+        <div class="phase-tag tg">$5,000</div>
+        <div class="phase-tag tg">$1k × 4</div>
+      </div>
     </div>
-    <div class="nights-grid">
-      <div class="night-card">
-        <div class="night-header">Monday <span class="night-tables">4/10 tables</span></div>
-        <div class="night-matches">
-          <div class="match-chip dc" data-div="c">
-            <div class="chip-div">Division C</div>
-            <div class="chip-round">WB Final</div>
-            <div class="chip-count">1 match · 1 table</div>
-            <div class="chip-time">2–5 hrs per match</div>
-          </div>
-          <div class="match-chip dd" data-div="d">
-            <div class="chip-div">Division D</div>
-            <div class="chip-round">WB Final</div>
-            <div class="chip-count">1 match · 1 table</div>
-            <div class="chip-time">2–5 hrs per match</div>
-          </div>
-          <div class="match-chip dc" data-div="c">
-            <div class="chip-div">Division C</div>
-            <div class="chip-round">LB Final</div>
-            <div class="chip-count">1 match · 1 table</div>
-            <div class="chip-time">2–5 hrs per match</div>
-          </div>
-          <div class="match-chip dd" data-div="d">
-            <div class="chip-div">Division D</div>
-            <div class="chip-round">LB Final</div>
-            <div class="chip-count">1 match · 1 table</div>
-            <div class="chip-time">2–5 hrs per match</div>
-          </div>
-        </div>
+    <div class="phase-body">
+      <div class="phase-row">
+        <div class="phase-div-label"><div class="phase-div-dot" style="background:var(--gold)"></div><span style="color:var(--gold)">Semifinal 1</span></div>
+        <div class="phase-rounds">Division A Champion vs Division B Champion<br><span>Single match · Winner advances to $10k final · Loser plays for $5k</span></div>
+        <div class="phase-matches">1<small>match</small></div>
       </div>
-      <div class="night-card">
-        <div class="night-header">Tuesday <span class="night-tables">2/10 tables</span></div>
-        <div class="night-matches">
-          <div class="match-chip da" data-div="a">
-            <div class="chip-div">Division A</div>
-            <div class="chip-round">WB Final</div>
-            <div class="chip-count">1 match · 1 table</div>
-            <div class="chip-time">2–5 hrs per match</div>
-          </div>
-          <div class="match-chip da" data-div="a">
-            <div class="chip-div">Division A</div>
-            <div class="chip-round">LB Final</div>
-            <div class="chip-count">1 match · 1 table</div>
-            <div class="chip-time">2–5 hrs per match</div>
-          </div>
-        </div>
+      <div class="phase-row">
+        <div class="phase-div-label"><div class="phase-div-dot" style="background:var(--gold)"></div><span style="color:var(--gold)">Semifinal 2</span></div>
+        <div class="phase-rounds">Division C Champion vs Division D Champion<br><span>Single match · Winner advances to $10k final · Loser plays for $5k</span></div>
+        <div class="phase-matches">1<small>match</small></div>
       </div>
-      <div class="night-card">
-        <div class="night-header">Wednesday <span class="night-tables">2/10 tables</span></div>
-        <div class="night-matches">
-          <div class="match-chip db" data-div="b">
-            <div class="chip-div">Division B</div>
-            <div class="chip-round">WB Final</div>
-            <div class="chip-count">1 match · 1 table</div>
-            <div class="chip-time">2–5 hrs per match</div>
-          </div>
-          <div class="match-chip db" data-div="b">
-            <div class="chip-div">Division B</div>
-            <div class="chip-round">LB Final</div>
-            <div class="chip-count">1 match · 1 table</div>
-            <div class="chip-time">2–5 hrs per match</div>
-          </div>
-        </div>
+      <div class="phase-row">
+        <div class="phase-div-label"><div class="phase-div-dot" style="background:var(--gold)"></div><span style="color:var(--gold)">$10,000 Final 🏆</span></div>
+        <div class="phase-rounds">SF1 winner vs SF2 winner · Single match · Winner takes $10,000<br><span>Any division can be here — a C or D team can knock out A or B</span></div>
+        <div class="phase-matches">1<small>match</small></div>
       </div>
-      <div class="night-card champ">
-        <div class="night-header">Thursday 🏆 <span class="night-tables">4 tables</span></div>
-        <div class="night-matches">
-          <div class="match-chip da" data-div="a">
-            <div class="chip-div">Division A</div>
-            <div class="chip-round">Grand Final</div>
-            <div class="chip-count">Featured table</div>
-          </div>
-          <div class="match-chip db" data-div="b">
-            <div class="chip-div">Division B</div>
-            <div class="chip-round">Grand Final</div>
-            <div class="chip-count">Featured table</div>
-          </div>
-          <div class="match-chip dc" data-div="c">
-            <div class="chip-div">Division C</div>
-            <div class="chip-round">Grand Final</div>
-            <div class="chip-count">Featured table</div>
-          </div>
-          <div class="match-chip dd" data-div="d">
-            <div class="chip-div">Division D</div>
-            <div class="chip-round">Grand Final</div>
-            <div class="chip-count">Featured table</div>
-          </div>
-        </div>
+      <div class="phase-row">
+        <div class="phase-div-label"><div class="phase-div-dot" style="background:#aaa)"></div><span style="color:#aaa">$5,000 Final</span></div>
+        <div class="phase-rounds">SF1 loser vs SF2 loser · Single match · Winner takes $5,000<br><span>Every team that makes it to Money Week is guaranteed at least a shot at $5k</span></div>
+        <div class="phase-matches">1<small>match</small></div>
       </div>
-      <div class="night-card champ">
-        <div class="night-header">Friday 🎉 <span class="night-tables">all tables open</span></div>
-        <div class="night-matches">
-          <div class="match-chip gf" data-div="all">
-            <div class="chip-div">All Divisions</div>
-            <div class="chip-round">Awards · Prizes · Championship Party</div>
-            <div class="chip-count">All tables open · Everyone invited</div>
-          </div>
-        </div>
+      <div class="phase-note gold">
+        Runner-up from each division (A, B, C, D) receives <strong>$1,000</strong> — paid out at the start of Money Week. Division E winner collects <strong>$500–1,000</strong> at the end of Phase 2. Everyone who makes it deep has something to play for.
       </div>
     </div>
   </div>
@@ -633,19 +491,6 @@
   <p style="font-family:'Boogaloo',cursive;font-size:1.2rem;color:#555;margin-bottom:.5rem;">🎱 Party 8 Ball Pool League</p>
   <p>Tournament format subject to change · Contact the league organizer with questions</p>
 </footer>
-
-<script>
-function filterDiv(div) {
-  document.querySelectorAll('.div-pill').forEach(p => p.classList.remove('active'));
-  const map = { all: 'all', a: 'pa', b: 'pb', c: 'pc', d: 'pd' };
-  document.querySelector('.' + map[div]).classList.add('active');
-  document.querySelectorAll('.match-chip[data-div]').forEach(chip => {
-    const cd = chip.getAttribute('data-div');
-    const show = div === 'all' || cd === div || cd === 'all' || cd === 'off';
-    chip.classList.toggle('hidden', !show);
-  });
-}
-</script>
 
 </body>
 </html>
